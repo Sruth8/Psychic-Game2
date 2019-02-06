@@ -23,7 +23,7 @@
 
     <div>
         <p id="directions-text">Guess what letter I'm thinking of?</p>
-        <p id="userchoice-text">Your letter: </p>
+        <p id="YourLetter-text">Your letter: </p>
         <p id="computerchoice-text">Computers choses: </p>
         <p id="wins-text">Wins:</p>
         <p id="losses-text">Losses:</p>
@@ -44,13 +44,14 @@
         var losses = 0;
         var tries = 10;
         var GuessesLeft = [];
-        var YourGuesses = [];
+        var YourLetter = [];
         var score = [];
         var GuessesSofar =[];
 
 
         var directionsText = document.getElementById("directions-text");
-        var triesText = document.getElementById("userchoice-text");
+        var triesText = document.getElementById("tries-text");
+        var YourLetterText = document.getElementById("YourLetter-text");
         var computerChoiceText = document.getElementById("computerchoice-text");
         var winsText = document.getElementById("wins-text");
         var lossesText = document.getElementById("losses-text");
@@ -70,7 +71,7 @@
             var computerGuess = computerChoice[Math.floor(Math.random() * computerChoice.length)];
 
 
-            if (YourGuesses === computerChoice) {
+            if (YourLetter === computerChoice) {
                 wins++;
                 tries = 10;
                 GuessesLeft = [];
@@ -78,7 +79,7 @@
             }
 
 
-            else if (YourGuesses === 0) {
+            else if (YourLetter === 0) {
                 losses++;
                 GuessesLeft = 10;
                 tries = [];
@@ -114,7 +115,7 @@
             //document.write("Guesses Left:");
             // document.write("Your guesses so far:");
 
-            triesText.textContent = "Your letter: " + YourGuesses;
+            YourLetterText.textContent = "Your letter: " + YourLetter;
             winsText.textContent = "Wins: " + wins;
             lossesText.textContent = "Losses: " + losses;
             GuessesLeftText.textContent = "Guesses Left: " + GuessesLeft;
