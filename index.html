@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
+
 
 <head>
     <meta charset="utf-8" />
@@ -19,19 +20,20 @@
 
 
     <div>
-        <p id="directions-text">Try you luck bellow!</p>
-        <p id="userchoice-text"></p>
-        <p id="computerchoice-text"></p>
-        <p id="wins-text"></p>
-        <p id="losses-text"></p>
-        <p id="ties-text"></p>
+        <p id="directions-text">Guess what letter I'm thinking of</p>
+        <p id="userchoice-text">Your letter: </p>
+        <p id="computerchoice-text">Computers choses: </p>
+        <p id="wins-text">Wins:</p>
+        <p id="losses-text">Losses:</p>
+        <p id="GuessesLeft-text">GuessesLeft:</p>
+        <p id="YourGesses-text">Your Guesses so far:</p>
     </div>
 
 
 
 
 
-    <script src="text/javascript">
+    <script src="assets/javascript">
 
         var computerChoice = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
         var wins = 0;
@@ -50,7 +52,9 @@
 
         // user presses a key.
         document.onkeyup = function (event) {
+                       
             //  keeps up with the keys pressed.
+            
             var tries = event.key;
             // counts the users tries or entries to the game.
 
@@ -106,7 +110,7 @@
             winsText.textContent = "wins: " + wins;
             lossesText.textContent = "losses: " + losses;
             triesText.textContent = "Your Guesses so far: " + tries;
-
+              console.log("wins");
         };
 
 
