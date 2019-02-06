@@ -1,4 +1,6 @@
+
 <!DOCTYPE html>
+
 <html lang="en-us">
 
 
@@ -20,12 +22,12 @@
 
 
     <div>
-        <p id="directions-text">Guess what letter I'm thinking of</p>
+        <p id="directions-text">Guess what letter I'm thinking of?</p>
         <p id="userchoice-text">Your letter: </p>
         <p id="computerchoice-text">Computers choses: </p>
         <p id="wins-text">Wins:</p>
         <p id="losses-text">Losses:</p>
-        <p id="GuessesLeft-text">GuessesLeft:</p>
+        <p id="GuessesLeft-text">Guesses Left:</p>
         <p id="YourGesses-text">Your Guesses so far:</p>
     </div>
 
@@ -33,23 +35,28 @@
 
 
 
-    <script src="assets/javascript">
+    <script type="text/javascript">
 
         var computerChoice = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
         var wins = 0;
         var losses = 0;
         var tries = 10;
-        var guessesLeft = [];
-        var YourGuesses = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+        var GuessesLeft = [];
+        var YourGuesses = [];
         var score = [];
+        var GuessesSoFar =[];
+
 
         var directionsText = document.getElementById("directions-text");
-        var userChoiceText = document.getElementById("userchoice-text");
+        var triesText = document.getElementById("userchoice-text");
         var computerChoiceText = document.getElementById("computerchoice-text");
         var winsText = document.getElementById("wins-text");
         var lossesText = document.getElementById("losses-text");
         var score = document.getElementById("score-text");
-
+        var GuessesLeftText = document.getElementById("GuessesLeft-text"); 
+        var GuessesSofarText = document.getElementById("GuessesSoFar-text"); 
+        
+        
         // user presses a key.
         document.onkeyup = function (event) {
                        
@@ -59,24 +66,24 @@
             // counts the users tries or entries to the game.
 
             //computer picks the letters
-            var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+            var computerGuess = computerChoice[Math.floor(Math.random() * computerChoice.length)];
 
 
             if (YourGuesses === computerChoice) {
                 wins++;
                 tries = 10;
-                guessesLeft = [];
+                GuessesLeft = [];
 
             }
 
 
             else if (YourGuesses === 0) {
                 losses++;
-                guessesLeft = 10;
+                GuessesLeft = 10;
                 tries = [];
             }
 
-            else (tries !== letters); {
+            else (tries !== GuessesLeft); {
                 tries--;
             }
 
@@ -106,11 +113,13 @@
             //document.write("Guesses Left:");
             // document.write("Your guesses so far:");
 
-            userChoiceText.textContent = "Guess what letter I'm thinking of: " + userGuess;
-            winsText.textContent = "wins: " + wins;
-            lossesText.textContent = "losses: " + losses;
-            triesText.textContent = "Your Guesses so far: " + tries;
-              console.log("wins");
+            triesText.textContent = "Your letter: " + YourGuesses;
+            winsText.textContent = "Wins: " + wins;
+            lossesText.textContent = "Losses: " + losses;
+            GuessesLeftText.textContent = "Guesses Left: " + GuessesLeft;
+            GuessesSofarText.textContent = "Your Guesses so far: " + GuessesSoFar;
+            ScoreText.textContent = "Score: " + score;
+            console.log("wins");
         };
 
 
