@@ -20,29 +20,29 @@
 
 
 
-    
-        <p>"Guess what letter I'm thinking of?"</p>
+
+    <p>"Guess what letter I'm thinking of?"</p>
 
 
-        <h3>Wins: <span id="wins"></span></h3>
+    <h3>Wins: <span id="wins"></span></h3>
 
 
-        <h3>Losses: <span id="Losses"></span></h3>
+    <h3>Losses: <span id="Losses"></span></h3>
 
-        <p>Guesses Left:
-            <span id="remainer"></span>
-        </p>
+    <p>Guesses Left:
+        <span id="GuessesLeft"></span>
+    </p>
 
-        <p>Your Guesses so far: <span id="GuessesSofar"></span></p>
+    <p>Your Guesses so far: <span id="GuessesSofar"></span></p>
 
-        <!-- <p>"Guess what letter I'm thinking of?"</p>
+    <!-- <p>"Guess what letter I'm thinking of?"</p>
         <p>Wins:</p>
         <p></p>Losses:</p>
         <p>Guesses Left:</p>
         <p>Your Guesses so far:</p>
         <p>Score:</p> -->
 
-    
+
 
 
 
@@ -50,15 +50,29 @@
 
     <script type="text/javascript">
         //var computerChoice = [];
-        var computerChoice = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-       var wins = 0;
-        // var losses = 0;
-        // var tries = 15;
-        var remainer= 15;
+        // var computerChoice = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+        var wins = 0;
+        var losses = 0;
+        var tries = 15;
+        //var remainer = 15;
         // var score = [];
-        var Guesses = [];
-        var remainder = remainder;
-        var letter = letter;
+        //var Guesses = [];
+        // var remainder = remainder;
+       // var letter;
+        var GuessesSofar = []
+        var comptLetter;
+
+        Start();
+
+        function Start(){
+            comptLetter = String.fromCharCode(Math.round(Math.random() * 26) + 97);
+            tries = 15;
+            GuessesSofar = [];
+            forWins();
+            forLosses();
+            forGuesses();
+            displayWrongGuess();
+        }
 
 
         // var directionsText = document.getElementById("directions-text");
@@ -71,11 +85,12 @@
         // var GuessesSofarText = document.getElementById("GuessesSofar-text");
         // var scoreText = document.getElementById("score-text");
 
-       // this creates the computers random letter
-       var comptLetter = String.fromCharCode(Math.round(Math.random() * 26) + 97
-        );
+        // this creates the computers random letter
+        
 
-        console.log(comptLetter);
+        // var randomLetter = computerChoice[Math.floor(Math.random() * computerChoice.length)]
+
+        //console.log(comptLetter);
 
 
         // user presses a key.
@@ -83,15 +98,63 @@
 
             //  keeps up with the keys pressed.
 
-            var keys = event.key;
-            console.log(keys);
-            //  Letter(keys);
+            var keys = String.fromCharCode(event.keyCode).toLowerCase();
+            //console.log(keys);
+            Letter(keys);
 
         }
 
+        // function ReturnSameBool (keyString){
+        //     for(var i = 0; i < GuessesSofar.length; i++){
+        //         var item = GuessesSofar[i];
+        //         if(item === keyString){
+        //             return true
+        //         }
+        //     }
+        //     return false
+        // }
+        // var testArray = [
+        //     {
+        //         name: "Ben",
+        //         age: 30,
+        //         occupation: "tutor"
+        //     },
+        //     {
+        //         name: "Ben",
+        //         age: 320,
+        //         occupation: "tutor"
+        //     },
+        //     {
+        //         name: "Ben",
+        //         age: 10,
+        //         occupation: "tutor"
+        //     },
+        //     {
+        //         name: "Ben",
+        //         age: 30,
+        //         occupation: "tutor"
+        //     },
+        // ]
 
-        function letter(keyString) {
-            var samekey = GuessesSofar.some(function (item) {
+
+        // var newArray = testArray.map(function (item) {
+        //     if (item.age < 50) {
+
+        //         var obj = {
+        //             name: item.name,
+        //             age: item.age
+        //         }
+        //         return obj;
+        //     }
+        //     return false;
+        // })
+
+        // console.log(newArray)
+        function Letter(keyString) {
+            //var samekey = ReturnSameBool(keyString)
+
+
+            var prevGuess = GuessesSofar.some(function (item) {
                 return item === keyString;
             })
 
@@ -99,36 +162,43 @@
 
 
             // this will give an alert if the same key is pressed
-            if (samekey) {
+            if (prevGuess) {
                 alert(keyString + " You have used that one. Try again!");
-
-               
+            } else {
+                RunGame(keyString);
             }
-        
-            KeysPushed();
-                // doublekeys(keyString);
-                same(keyString);
-        
+
+            // KeysPushed();
+            // doublekeys(keyString);
+
         }
 
 
 
 
         //this should show the letters that the player used
-        function showKeys() {
+        function displayWrongGuess() {
             var usedkeys = GuessesSofar.join(", ");
             document.getElementById("GuessesSofar").innerHTML = usedkeys;
         }
 
-        function same(keys) {
-
-            console.log(keys);
+        function RunGame(keys) {
 
             if (keys === comptLetter) {
                 wins++;
-                tries = 15;
-                // GuessesSofar = [];
-                alert("You win");
+                Start();
+            }
+            else {
+                tries--;
+                GuessesSofar.push(keys);
+                displayWrongGuess();
+                forGuesses();
+                console.log(`Your guess: ${keys}, Computer Letter: ${comptLetter}, GuessesLeft: ${tries}`)
+
+                if(tries === 0){
+                    losses++;
+                    Start();
+                }
             }
 
 
@@ -143,7 +213,7 @@
 
         function forWins() { document.getElementById("wins").innerHTML = wins; }
         function forLosses() { document.getElementById("Losses").innerHTML = losses; }
-        function forGuesses() { document.getElementById("GuessesLeft").innerHTML = GuessesLeft; }
+        function forGuesses() { document.getElementById("GuessesLeft").innerHTML = tries; }
         function forPicked() { document.getElementById("GuessesSofar").innerHTML = GuessesSofar; }
 
 
